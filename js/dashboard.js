@@ -7,7 +7,7 @@
     // Logout functionality
     document.getElementById('logoutBtn').addEventListener('click', () => {
         localStorage.removeItem('currentUser');
-        window.location.href = 'home.html';
+        window.location.href = 'index.html';
     });
 
     // Profile Elements
