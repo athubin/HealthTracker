@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthTracker - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/soon.css">
+</head>
+<body>
+
+<nav class="side-nav">
+    <h2><i class="fas fa-heartbeat"></i> HealthTracker</h2>
+    <div class="nav-links">
+        <a href="dashboard.html"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+        <a href="steps.html"><i class="fas fa-running"></i> <span>Daily Steps</span></a>
+        <a href="water.html"><i class="fas fa-tint"></i> <span>Water Intake</span></a>
+        <a href="coming_soon.html#sleep"><i class="fas fa-moon"></i> <span>Sleep Tracker</span></a>
+        <a href="coming_soon.html#weight"><i class="fas fa-weight"></i> <span>Weight Management</span></a>
+        <a href="coming_soon.html#medicines"><i class="fas fa-pills"></i> <span>Your Medicines</span></a>
+        <a href="coming_soon.html#appointments"><i class="fas fa-calendar-check"></i> <span>Medical Appointments</span></a>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <header class="top-nav">
+        <h1 id="pageTitle">Coming Soon</h1>
+        <div class="user-profile">
+            <span id="topWelcome"></span>
+            <button id="logoutBtn">Logout</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="coming-soon">
+            <i class="fas fa-tools"></i>
+            <h1>Coming Soon!</h1>
+            <p>This feature is currently under development. We're working hard to bring you the best health tracking experience. Check back soon for updates!</p>
+            <button class="btn-back" onclick="window.history.back()">Go Back</button>
+        </div>
+    </main>
+</div>
+
+<script src="js/common.js"></script>
+
+<script>
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'login.html';
+    });
+
+    // Initialize user info
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+        document.getElementById('topWelcome').textContent = `Welcome, ${currentUser.email}`;
+    } else {
+        document.getElementById('topWelcome').textContent = 'Welcome, Guest';
+    }
+</script>
+<script>
+    // Set active sidebar link based on current page
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop().split('#')[0];
+        const currentHash = window.location.hash.slice(1); // remove #
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        // Remove active class from all links
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // Add active class to the link matching current page and hash
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            const linkPage = linkHref.split('#')[0];
+            const linkHash = linkHref.split('#')[1] || '';
+            
+            if (linkPage === currentPage && linkHash === currentHash) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html></content>

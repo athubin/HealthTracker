@@ -1,0 +1,575 @@
+:root {
+    --primary: #00b894;
+    --primary-dark: #00a383;
+    --bg-body: #f8fafc;
+    --text-main: #2d3436;
+    --text-light: #636e72;
+    --white: #ffffff;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --sidebar-width: 260px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+}
+
+/* ---------- Navigation ---------- */
+.side-nav {
+    width: var(--sidebar-width);
+    background: black;
+    height: 100vh;
+    position: fixed;
+    border-right: 1px solid #eef2f7;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    z-index: 1000;
+}
+
+.side-nav h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.side-nav a {
+    text-decoration: none;
+    color: white;
+    padding: 12px 15px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.side-nav a:hover, .side-nav a.active {
+    background: rgba(0, 184, 148, 0.1);
+    color: var(--primary);
+}
+
+/* ---------- Content Wrapper ---------- */
+.wrapper {
+    margin-left: var(--sidebar-width);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-nav {
+    height: 70px;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#logoutBtn {
+    background: #fff0f0;
+    color: #ff7675;
+    border: 1px solid #ff7675;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+#logoutBtn:hover {
+    background: #ff7675;
+    color: white;
+}
+
+/* ---------- Improved Cards ---------- */
+.main-content {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.02);
+    margin-bottom: 25px;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* Profile Insights Special Heading */
+.section-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Health Notes/Advisory Styling */
+.health-note {
+    background: linear-gradient(to right, #e3fcef, #ffffff);
+    border-left: 5px solid var(--primary);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.health-note h4 {
+    color: var(--primary-hover);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+/* Form Elements */
+input[type="number"], select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="number"]:focus {
+    border-color: var(--primary);
+}
+
+.btn-save, .btn-log {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-save:hover, .btn-log:hover {
+    background: var(--primary-hover);
+}
+
+@media (max-width: 768px) {
+    .side-nav {
+        width: 100%;
+        height: 70px;
+        flex-direction: row;
+        top: auto;
+        bottom: 0;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        padding-top: 0;
+        justify-content: space-around;
+    }
+
+    .side-nav .logo { display: none; }
+
+    .side-nav a {
+        flex-direction: column;
+        padding: 10px;
+        font-size: 0.7rem;
+        gap: 5px;
+        border-left: none;
+        border-top: 3px solid transparent;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .side-nav a.active {
+        border-left: none;
+        border-top-color: var(--primary);
+    }
+
+    .wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding-bottom: 80px; /* Space for bottom nav */
+    }
+
+    .top-nav {
+        padding: 0 20px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+}
+
+/* Water Intake Tracker Specific Styles */
+
+.goal-display {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.goal-display p {
+    margin: 10px 0;
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.goal-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 15px 0;
+}
+
+.entry-form {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.entry-form input {
+    padding: 12px;
+    border: 2px solid #eef2f7;
+    border-radius: 10px;
+    width: 200px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.entry-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn-log {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-log:hover {
+    background: var(--primary-dark);
+}
+
+.encouragement {
+    font-style: italic;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 20px;
+    min-height: 24px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.health-note {
+    background: #e3fcef;
+    border-left: 5px solid var(--primary);
+    padding: 20px;
+    border-radius: 8px;
+    color: #1e3a2b;
+    line-height: 1.6;
+}
+
+.health-note h4 {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+}
+
+.health-note ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.health-note li {
+    margin-bottom: 10px;
+}
+
+/* ---------- Responsive Design ---------- */
+
+/* Large screens (desktops) */
+@media (min-width: 1200px) {
+    .main-content {
+        padding: 50px 60px;
+    }
+    
+    .card {
+        padding: 30px;
+    }
+    
+    .goal-number {
+        font-size: 4rem;
+    }
+}
+
+/* Medium screens (tablets and small laptops) */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 30px 25px;
+    }
+    
+    .top-nav {
+        padding: 0 25px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    .entry-form input {
+        width: 150px;
+    }
+    
+    .goal-number {
+        font-size: 2.5rem;
+    }
+}
+
+/* Small tablets and large phones */
+@media (max-width: 768px) {
+    .side-nav {
+        width: 100%;
+        height: 70px;
+        flex-direction: row;
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        padding: 0;
+        justify-content: space-around;
+        border-right: none;
+        border-top: 1px solid #eef2f7;
+    }
+
+    .side-nav h2 {
+        display: none;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .side-nav a {
+        flex-direction: column;
+        padding: 8px 5px;
+        font-size: 0.7rem;
+        gap: 3px;
+        margin: 0;
+        border-radius: 0;
+        border-left: none;
+        border-top: 3px solid transparent;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        min-height: 50px;
+    }
+
+    .side-nav a:hover, .side-nav a.active {
+        border-top-color: var(--primary);
+        background: rgba(0, 184, 148, 0.05);
+    }
+
+    .wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding-bottom: 80px; /* Space for bottom nav */
+    }
+
+    .top-nav {
+        padding: 0 15px;
+        height: 60px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .entry-form {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .entry-form input {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .btn-log {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .goal-number {
+        font-size: 2rem;
+    }
+
+    .section-heading {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .health-note {
+        padding: 15px;
+    }
+
+    .health-note h4 {
+        font-size: 1rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .top-nav {
+        padding: 0 10px;
+    }
+
+    .user-profile {
+        gap: 8px;
+    }
+
+    #logoutBtn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .goal-display p {
+        font-size: 0.9rem;
+    }
+
+    .goal-number {
+        font-size: 1.8rem;
+        margin: 10px 0;
+    }
+
+    .entry-form {
+        gap: 8px;
+    }
+
+    .entry-form input {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .btn-log {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .encouragement {
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
+    .health-note {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .health-note h4 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .health-note ul {
+        padding-left: 15px;
+    }
+
+    .health-note li {
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+
+    .section-heading {
+        font-size: 1rem;
+        gap: 8px;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+    .side-nav a {
+        font-size: 0.6rem;
+        padding: 5px 2px;
+        gap: 2px;
+    }
+
+    .top-nav {
+        height: 55px;
+    }
+
+    .main-content {
+        padding: 8px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .goal-number {
+        font-size: 1.5rem;
+    }
+
+    .btn-log {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+}

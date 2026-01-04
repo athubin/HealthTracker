@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/home.css">
+<title>HealthTracker - Home</title>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav>
+    <h1><a href = "home.html">HealthTracker</a></h1>
+
+    <div class="hamburger" id="hamburger">☰</div>
+
+    <ul id="navMenu">
+        <li><a href="#features">Features</a></li>
+        <li><button id="authBtn">Login</button></li>
+    </ul>
+</nav>
+
+<!-- Banner -->
+<div class="banner">
+    <div class="banner-content">
+        <h2>Smart Tracking for Better Health</h2>
+        <p>Monitor vital health metrics, track daily habits, and receive smart tips for a healthier life.</p>
+        <button class="cta-button"><a href="tips.html">Health Tips</a></button>
+        <button class="cta-button"><a href="login.html">Get Started</a></button>
+    </div>
+</div>
+
+<!-- Features -->
+<section class="features" id="features">
+    <h2 class="features-title">Explore Our Features</h2>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Daily Steps</h3>
+            <p>Track your daily steps and stay active with personalized goals.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Sleep Tracker</h3>
+            <p>Monitor your sleep patterns and improve rest quality.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Water Intake</h3>
+            <p>Keep track of your daily water consumption and stay hydrated.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Weight Management</h3>
+            <p>Track your weight and body metrics to achieve your health goals.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Medication Remainder</h3>
+            <p>Set reminders for your medications and never miss a dose again.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Health Remainders</h3>
+            <p>Set reminders for your health checkups and appointments.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 HealthTracker. All rights reserved.</p>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+const authBtn = document.getElementById('authBtn');
+
+/* Toggle hamburger menu */
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+
+    // Change icon
+    hamburger.textContent = navMenu.classList.contains('show') ? '✖' : '☰';
+});
+
+/* Close menu when clicking any nav link */
+document.querySelectorAll('#navMenu a, #navMenu button').forEach(item => {
+    item.addEventListener('click', () => {
+        navMenu.classList.remove('show');
+        hamburger.textContent = '☰';
+    });
+});
+
+/* Login / Logout logic */
+function updateAuthButton() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    authBtn.textContent = currentUser ? 'Logout' : 'Login';
+}
+
+authBtn.addEventListener('click', () => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+        localStorage.removeItem('currentUser');
+        updateAuthButton();
+    } else {
+        window.location.href = 'login.html';
+    }
+});
+
+updateAuthButton();
+</script>
+
+
+</body>
+</html>

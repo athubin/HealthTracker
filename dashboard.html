@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthTracker - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<nav class="side-nav">
+    <h2><i class="fas fa-heartbeat"></i> HealthTracker</h2>
+    <div class="nav-links">
+        <a href="dashboard.html" class="active"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+        <a href="steps.html"><i class="fas fa-running"></i> <span>Daily Steps</span></a>
+        <a href="water.html"><i class="fas fa-tint"></i> <span>Water Intake</span></a>
+        <a href="coming_soon.html#sleep"><i class="fas fa-moon"></i> <span>Sleep Tracker</span></a>
+        <a href="coming_soon.html#weight"><i class="fas fa-weight"></i> <span>Weight Management</span></a>
+        <a href="coming_soon.html#medicines"><i class="fas fa-pills"></i> <span>Your Medicines</span></a>
+        <a href="coming_soon.html#appointments"><i class="fas fa-calendar-check"></i> <span>Medical Appointments</span></a>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <header class="top-nav">
+        <h1 id="pageTitle">Dashboard</h1>
+        <div class="user-profile">
+            <span id="topWelcome">Welcome, User</span>
+            <button id="logoutBtn">Logout</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <div class="card profile-card" id="profileSection">
+            <div class="profile-header">
+                <h3><i class="fas fa-user-circle"></i> My Health Profile</h3>
+                <button id="editProfileBtn" class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+            </div>
+            
+            <div id="profileView" class="profile-grid">
+                <div class="info-item"><span>Age:</span> <strong id="displayAge">--</strong></div>
+                <div class="info-item"><span>Gender:</span> <strong id="displayGender">--</strong></div> <div class="info-item"><span>Weight:</span> <strong id="displayWeight">--</strong> kg</div>
+                <div class="info-item"><span>Height:</span> <strong id="displayHeight">--</strong> cm</div>
+                <div class="info-item"><span>Daily Goal:</span> <strong id="displayGoal">--</strong> steps</div>
+            </div>
+
+            <form id="profileEdit" class="profile-grid" style="display: none;">
+                <div class="input-item">
+                    <label>Age</label>
+                    <input type="number" id="inputAge" placeholder="Years">
+                </div>
+                <div class="input-item">
+                    <label>Gender</label>
+                    <select id="inputGender" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-item">
+                    <label>Weight (kg)</label>
+                    <input type="number" id="inputWeight" placeholder="kg">
+                </div>
+                <div class="input-item">
+                    <label>Height (cm)</label>
+                    <input type="number" id="inputHeight" placeholder="cm">
+                </div>
+                <div class="input-item">
+                    <label>Step Goal</label>
+                    <input type="number" id="inputGoal" placeholder="Steps">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="saveProfileBtn" class="btn-save">Save Changes</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="recommendationsSection" style="display: none; margin-bottom: 30px;">
+            <h2 style="font-size: 1.2rem; margin-bottom: 15px; color: var(--text-main); display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-lightbulb" style="color: var(--accent);"></i> 
+                Personalized Health Insights
+            </h2>
+
+            <div class="recommendations-row" id="recommendationsRow">
+                <div class="rec-card">
+                    <i class="fas fa-walking"></i>
+                    <div>
+                        <span>Recommended Steps</span>
+                        <p id="recSteps">--</p>
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <i class="fas fa-tint"></i>
+                    <div>
+                        <span>Water Goal</span>
+                        <p id="recWater">--</p>
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <i class="fas fa-bed"></i>
+                    <div>
+                        <span>Ideal Sleep</span>
+                        <p id="recSleep">--</p>
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <i class="fas fa-weight"></i>
+                    <div>
+                        <span>BMI Status</span>
+                        <p id="recWeight">--</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="welcome-section">
+            <h2>Daily Overview</h2>
+            <p style="color: var(--text-light)">Your progress for today, <span id="currentDate">--</span></p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card metric-card">
+                <div class="metric-header">
+                    <div class="card-icon steps-icon"><i class="fas fa-shoe-prints"></i></div>
+                    <span class="trend up"><i class="fas fa-arrow-up"></i> Today</span>
+                </div>
+                <h3>Today's Steps</h3>
+                <p class="metric-value" id="dailySteps">0</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="stepsBar" style="width: 0%"></div>
+                </div>
+                <small id="stepsRemaining">Goal: --</small>
+            </div>
+            
+            <div class="card metric-card">
+                <div class="metric-header">
+                    <div class="card-icon water-icon"><i class="fas fa-faucet-drip"></i></div>
+                    <span class="trend"><i class="fas fa-tint"></i> Today</span>
+                </div>
+                <h3>Today's Water</h3>
+                <p class="metric-value" id="dailyWater">0.0 <span class="unit">L</span></p>
+                <div class="progress-container">
+                    <div class="progress-bar water-bar" id="waterBar" style="width: 0%"></div>
+                </div>
+                <small id="waterRemaining">Target: --</small>
+            </div>
+            
+            <div class="card metric-card">
+                <div class="metric-header">
+                    <div class="card-icon sleep-icon"><i class="fas fa-moon"></i></div>
+                    <span class="trend"><i class="fas fa-clock"></i> Last Night</span>
+                </div>
+                <h3>Sleep Quality</h3>
+                <p class="metric-value" id="dailySleep">0 <span class="unit">hrs</span></p>
+                <div class="progress-container">
+                    <div class="progress-bar sleep-bar" id="sleepBar" style="width: 0%"></div>
+                </div>
+                <small id="sleepQuality">Recommended: 8h</small>
+            </div>
+        </div>
+
+        <div class="card chart-card">
+            <div class="profile-header">
+                <h3><i class="fas fa-chart-line"></i> Weekly Activity Trend</h3>
+                <select id="chartFilter">
+                    <option value="steps">Steps</option>
+                    <option value="water">Water</option>
+                    <option value="sleep">Sleep</option>
+                </select>
+            </div>
+            <div class="chart-container" style="position: relative; height:350px; width:100%; margin-top: 20px;">
+                <canvas id="healthChart"></canvas>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>

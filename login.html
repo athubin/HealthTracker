@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthTracker - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<nav>
+    <h1>HealthTracker</h1>
+    <div class="hamburger" id="hamburger">☰</div>
+    <ul id="navMenu">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html#features">Features</a></li>
+    </ul>
+</nav>
+
+<div class="login-container">
+    <h1>HealthTracker</h1>
+    <h2 id="formTitle">Login</h2>
+
+    <form id="loginForm">
+        <div class="form-group" id="nameGroup" style="display:none;">
+            <input type="text" id="regName" placeholder="Full Name">
+        </div>
+
+        <div class="form-group">
+            <input type="email" id="userEmail" placeholder="Email" required>
+        </div>
+
+        <div class="form-group">
+            <input type="password" id="userPassword" placeholder="Password" required>
+        </div>
+
+        <div class="form-group" id="confirmGroup" style="display:none;">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">Login</button>
+    </form>
+
+    <div id="error" class="error"></div>
+    <div id="success" class="success"></div>
+
+    <p><a href="#" id="toggleLink" class="toggle-link">Don't have an account? Sign up</a></p>
+</div>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    const toggleLink = document.getElementById('toggleLink');
+    const formTitle = document.getElementById('formTitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const nameGroup = document.getElementById('nameGroup');
+    const confirmGroup = document.getElementById('confirmGroup');
+    const errorDiv = document.getElementById('error');
+    const successDiv = document.getElementById('success');
+    const loginForm = document.getElementById('loginForm');
+
+    let isLogin = true;
+
+    // Hamburger Menu
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+    });
+
+    // Toggle Login/Signup
+    toggleLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        isLogin = !isLogin;
+        
+        formTitle.textContent = isLogin ? 'Login' : 'Sign Up';
+        submitBtn.textContent = isLogin ? 'Login' : 'Sign Up';
+        nameGroup.style.display = isLogin ? 'none' : 'block';
+        confirmGroup.style.display = isLogin ? 'none' : 'block';
+        toggleLink.textContent = isLogin ? "Don't have an account? Sign up" : "Already have an account? Login";
+        
+        errorDiv.style.display = 'none';
+        successDiv.style.display = 'none';
+        loginForm.reset();
+    });
+
+    // Handle Form Submission
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        errorDiv.style.display = 'none';
+        successDiv.style.display = 'none';
+
+        // Correctly capturing input values
+        const email = document.getElementById('userEmail').value.trim();
+        const password = document.getElementById('userPassword').value;
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+
+        if (isLogin) {
+            // LOGIN LOGIC
+            const user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                window.location.href = 'dashboard.html'; // Change to your dashboard filename
+            } else {
+                errorDiv.textContent = "Invalid email or password";
+                errorDiv.style.display = "block";
+            }
+        } else {
+            // SIGNUP LOGIC
+            const name = document.getElementById('regName').value.trim();
+            const confirmPass = document.getElementById('confirmPassword').value;
+
+            if (!name || !email || !password) {
+                errorDiv.textContent = "All fields are required";
+                errorDiv.style.display = "block";
+                return;
+            }
+
+            if (password !== confirmPass) {
+                errorDiv.textContent = "Passwords do not match";
+                errorDiv.style.display = "block";
+                return;
+            }
+
+            if (users.some(u => u.email === email)) {
+                errorDiv.textContent = "Email already exists";
+                errorDiv.style.display = "block";
+                return;
+            }
+
+            users.push({ name, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            successDiv.textContent = "Account created! Switching to login...";
+            successDiv.style.display = "block";
+            
+            setTimeout(() => {
+                toggleLink.click();
+            }, 1500);
+        }
+    });
+</script>
+</body>
+</html>

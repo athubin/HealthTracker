@@ -1,0 +1,167 @@
+:root {
+            --primary: #00b894;
+            --primary-dark: #00a383;
+            --bg-body: #f8fafc;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --sidebar-width: 260px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+        }
+
+        /* ---------- Sidebar ---------- */
+        .side-nav {
+            width: var(--sidebar-width);
+            background: black;
+            height: 100vh;
+            position: fixed;
+            border-right: 1px solid #eef2f7;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            z-index: 1000;
+        }
+
+        .side-nav h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .side-nav a {
+            text-decoration: none;
+            color: white;
+            padding: 12px 15px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .side-nav a:hover, .side-nav a.active {
+            background: rgba(0, 184, 148, 0.1);
+            color: var(--primary);
+        }
+
+        /* ---------- Main Content ---------- */
+        .wrapper {
+            margin-left: var(--sidebar-width);
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-nav {
+            height: 70px;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid #eef2f7;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #logoutBtn {
+            background: #fff0f0;
+            color: #ff7675;
+            border: 1px solid #ff7675;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        #logoutBtn:hover {
+            background: #ff7675;
+            color: white;
+        }
+
+        .main-content {
+            padding: 40px;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+        }
+
+        .coming-soon {
+            text-align: center;
+            background: var(--white);
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .coming-soon i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .coming-soon h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .coming-soon p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .coming-soon .btn-back {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .coming-soon .btn-back:hover {
+            background: var(--primary-dark);
+        }
